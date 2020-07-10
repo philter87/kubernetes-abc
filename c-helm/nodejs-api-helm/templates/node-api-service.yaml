@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-api-service
+  namespace: my-api-{{ .Values.appEnvironment}}
+spec:
+  selector:
+    app: my-api-label
+  ports:
+    - port: {{ .Values.portNo }}
+      targetPort: 8080
+  type: LoadBalancer

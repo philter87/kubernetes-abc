@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-api
+  labels:
+    app: my-api-label
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-api-label
+  template:
+    metadata:
+      labels:
+        app: my-api-label
+    spec:
+      containers:
+        - name: nodejs-api-container
+          image: my-api:1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: APP_ENV
+              value: "DEV"
+            - name: APP_SECRET
+              value: "NOT_REALLY_SECRET_YET"

@@ -1,0 +1,19 @@
+# Hint 1: Copy-paste from this link: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service
+# Hint 2: targetPort and port should both be 8080.
+# Hint 3: selector. The selector field "connects" the service to a deployment, so "app: <app-label>"
+# Hint 4: type. The service should be a LoadBalancer. Maybe you can find out how to set the on the page from Hint 1
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-api-service
+  labels:
+    app: my-api-label
+spec:
+  selector:
+    app: my-api-label
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: LoadBalancer
