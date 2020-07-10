@@ -1,23 +1,19 @@
 ## Docker
 
-We want to run docker container with a small nodejs app. You don't need to understand the nodejs code - It is just a simple API with three endpoints.    
+We want to run a docker container with a small app with three endpoints.    
 
-Agenda for docker section
-- Build image with nodejs
-- Run Image
-
-#### What to do?
-First we need to create a small application. The app have the following functionality:   
+#### What?
+The application we are running has three endpoints:   
 
 The app will expose three endpoints at http://localhost:8080.
 - '/'. Returns "Hello World!" 
 - '/env'. Returns the environment variable "APP_ENV" if exists.
 - '/secret'. Returns "APP_SECRET" if exists.
 
-These endpoints will become important later when we want to deploy to kubernetes in different environment. I know the APP_SECRET is silly, but later I want to illustrate how to provide secrets in kubernetes.  
+>These endpoints will become important later when we want to deploy to kubernetes in different environment. I know the APP_SECRET is silly, but later I want to illustrate how to provide secrets in kubernetes.  
 
 #### Run application on this machine (Optional)
-Initially, we will just run the nodejs application locally. This is optionally because it requires nodejs.
+The app we will run is a nodejs app. You can just skip this section if you don't have node installed.
 
 ```bash
 # install dependencies and run app
@@ -27,6 +23,8 @@ node index.js
 # run the app locally
 node index.js
 ```
+
+> Why nodejs? Because it is very simple. One file "index.js" with 13 lines of code
 
 #### Build and run with docker
 ```bash

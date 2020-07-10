@@ -1,22 +1,18 @@
 ## Kubernetes workshop
 The purpose is to deploy a docker image to a local Kubernetes with helm.
 
-We will deploy a small api to two environments - dev and a prod. The environments will have different env variables and secrets. See picture below.
-
-The kubernetes CLI tool "kubectl".
+We will deploy a small api to two environments - dev and a prod. The environments will have different env variables and secrets. See picture at the bottom.
 
 ### Agenda
 The workshop is divided in three parts - a folder and readme per folder.
-1. Docker
-2. Kubernetes
-3. Helm
+1. [Docker](a-docker)
+2. [Kubernetes](b-kubernetes)
+3. [Helm](c-helm)
 
 ### Prerequisites
-You will need some software - you should install this before the workshop.
+You will need some software. You can do it with Choco or manually: 
 
-I recommend that you install the software with [Chocolatey](https://chocolatey.org/docs/installation) if you already have it installed.
-
-###### Install with Chocolatey
+###### 1. Install with Chocolatey
 ```bash
 # Remember "Run as admin"
 choco install docker-desktop -y
@@ -24,7 +20,7 @@ choco install kubernetes-helm -y
 choco install nodejs -y
 ``` 
 
-###### Install Manually
+###### 2. Install Manually
 - Docker. [Install docker](https://docs.docker.com/docker-for-windows/install/)
 - Kubernetes CLI. [Install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
     - This might be included in the Docker installation. Test if exists with "kubectl version"  

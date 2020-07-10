@@ -3,13 +3,13 @@
 We will deploy to a local kubernetes cluster. 
 
 #### Agenda: 
-We will use the kubernetes cli tool "kubectl" for two things: 
-0. Start a kubernetes cluster locally.
-1. 'kubectl run'. Deploy docker image to kubernetes. Similar to 'docker run'
-2. 'kubectl apply'. Deploy docker image to kubernetes based on configuration
+We will create a cluster and use the kubernetes cli tool "kubectl": 
+1. Create a cluster on your machine.
+2. 'kubectl run'. Deploy docker image to kubernetes. Similar to 'docker run'
+3. 'kubectl apply'. Deploy docker image to kubernetes based on configuration
 
 
-#### Run kubernetes cluster locally 
+#### Create a kubernetes cluster on your machine 
 You will need to run a kubernetes cluster locally. This is fairly straight forward if you have installed docker.
  1. On windows - right click the docker icon in the lower right corner. 
  2. Click "Settings". 
@@ -31,7 +31,7 @@ kubectl get deploy
 kubectl get pod
 
 # The pod runs inside the clusters network. You can expose it through a service which we will call my-api-service. 
-# We will create a Service with type=LoadBalancer.     
+# We create a service called "my-api-service" that expose the app on localhost:8080.      
 kubectl expose deployment my-api-app --type=LoadBalancer --name=my-api-service --port=8080
 
 # You can see it here
@@ -64,11 +64,12 @@ kubectl get pod
 kubectl get deploy
 kubectl get service
 
-```
-
-> Assignment! Add a secret in kubernets and use this in the app   
+```   
 
 #### Secrets
+
+> Assignment! Add a secret in kubernets and use this in the app
+
 We will add a secret as well called "my-app-secret"
 ```bash
 kubectl create secret generic my-app-secret --from-literal=appsecret='This is a very secret message'
