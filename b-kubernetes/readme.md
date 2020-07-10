@@ -1,37 +1,36 @@
 ## Kubernetes
-
-We will deploy to a local kubernetes cluster. 
+We will deploy to a local kubernetes cluster with kubectl. 
 
 #### Agenda: 
-We will create a cluster and use the kubernetes cli tool "kubectl": 
 1. Create a cluster on your machine.
 2. 'kubectl run'. Deploy docker image to kubernetes. Similar to 'docker run'
 3. 'kubectl apply'. Deploy docker image to kubernetes based on configuration
+4. Add a secret to kubernetes
 
 
-#### Create a kubernetes cluster on your machine 
-You will need to run a kubernetes cluster locally. This is fairly straight forward if you have installed docker.
+#### 1. Create a kubernetes cluster on your machine 
+You will need to run a kubernetes cluster locally. This is fairly straight forward if you have docker installed.
  1. On windows - right click the docker icon in the lower right corner. 
  2. Click "Settings". 
  3. Find "Kubernetes" tab and click "Enable Kubernetes"
  4. Wait a bit
 
-##### Run image - "kubectl run"
+#### 2. Run image - "kubectl run"
 You can run an image with "kubectl run" which is very similar to "docker run" in the previous section.
 
 ```bash
 kubectl run --image=my-api:1.0.0 my-api-app --port=8080
 
 # The statement above will create two resources: a "deployment" and a "pod". 
-# A "pod" is usually a docker container and a "deployment" is a description of the "desired state" after a deploy.
+# A "pod" is usually a docker container and a "deployment" is a description of the desired state after a deploy.
 # For instance, a "deployment" will describe which image to use, which ports to expose and how many instances of an app
 
 # You can see pods and deployments with:
 kubectl get deploy
 kubectl get pod
 
-# The pod runs inside the clusters network. You can expose it through a service which we will call my-api-service. 
-# We create a service called "my-api-service" that expose the app on localhost:8080.      
+# The pod runs inside the clusters network. You can expose it through a service. 
+# We will call it "my-api-service" that exposes the app on localhost:8080.
 kubectl expose deployment my-api-app --type=LoadBalancer --name=my-api-service --port=8080
 
 # You can see it here
@@ -46,9 +45,7 @@ kubectl delete deploy/<deployment-name>
 kubectl delete service/<service-name>
 ```
  
-#### Deploy configuration - "kubectl apply"
-We want "Configuration as code". 
-
+#### 3. Deploy configuration - "kubectl apply"
 The file "node-api-deployment.yaml" contains the configuration required to create a "deployment" and "pod" similar to the previous section. The configuration is based on [A deployment configuration](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment).
 
 Furthermore, we have added some environment variables in the configuration. The environment variable APP_DEV is set to "DEV" and APP_SECRET="NOT_REALLY_A_SECRET_YET"".

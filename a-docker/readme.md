@@ -3,8 +3,6 @@
 We want to run a docker container with a small app with three endpoints.    
 
 #### What?
-The application we are running has three endpoints:   
-
 The app will expose three endpoints at http://localhost:8080.
 - '/'. Returns "Hello World!" 
 - '/env'. Returns the environment variable "APP_ENV" if exists.
@@ -18,7 +16,6 @@ The app we will run is a nodejs app. You can just skip this section if you don't
 ```bash
 # install dependencies and run app
 npm install
-node index.js
 
 # run the app locally
 node index.js
