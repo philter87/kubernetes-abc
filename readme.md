@@ -1,7 +1,14 @@
-## Kubernetes workshop
-The purpose is to deploy a docker image to a local Kubernetes with helm.
+## Kubernetes ABC
 
-We will deploy a small api to two environments - dev and a prod. The environments will have different env variables and secrets. See picture at the bottom.
+The is a small tutorial that will describe how to deploy a small application to kubernetes. The app is deployed to two
+environments which is illustrated on the picture at the bottom of the page.  
+
+We will only cover some basic kubernetes features, but for most developers this will be enough.  
+
+Most developers just need an easy way to do the following:
+- Deploy an app to multiple environments: dev, test, prod.
+- The app should have different environment variables depending on the environment.
+- A way to handle secrets, like database username and password.
 
 ### Agenda
 The workshop is divided in three parts - a folder and readme per folder.
