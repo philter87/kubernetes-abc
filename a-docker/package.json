@@ -1,10 +1,7 @@
 {
-  "name": "devops-api",
+  "name": "my-api",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "author": "Philip",
-  "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
   }
