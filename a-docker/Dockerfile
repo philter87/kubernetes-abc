@@ -10,4 +10,6 @@ RUN npm install
 # Copy script to image workdir
 COPY ./index.js .
 EXPOSE 8080
+
+# Run application with node index.js when image is run
 CMD [ "node", "index.js" ]

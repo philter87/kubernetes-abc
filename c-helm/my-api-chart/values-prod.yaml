@@ -1,3 +1,3 @@
-replicaCount: 1
 appEnvironment: prod
+replicaCount: 2
 portNo: 8081

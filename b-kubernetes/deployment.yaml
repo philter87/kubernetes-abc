@@ -23,4 +23,7 @@ spec:
             - name: APP_ENV
               value: "DEV"
             - name: APP_SECRET
-              value: "NOT_REALLY_SECRET_YET"
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secret
+                  key: appsecret

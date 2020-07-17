@@ -24,7 +24,6 @@ You will need some software. You can do it with Choco or manually:
 # Remember "Run as admin"
 choco install docker-desktop -y
 choco install kubernetes-helm -y
-choco install nodejs -y
 ``` 
 
 ###### 2. Install Manually
@@ -32,6 +31,5 @@ choco install nodejs -y
 - Kubernetes CLI. [Install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
     - This might be included in the Docker installation. Test if exists with "kubectl version"  
 - Helm CLI ("helm"). [Install helm](https://github.com/helm/helm/releases)
-- NodeJs (Optional). [Install node](https://nodejs.org/en/download/) We will run a nodejs app, so that is why you need this
     
 ![Kubernetes image](kubernetes-overview.png)

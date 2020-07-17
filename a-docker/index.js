@@ -1,13 +1,11 @@
 const express = require('express')
 const app = express()
 
-// Default is 8080
-const port = process.env.port || 8080
-const appEnv = process.env.APP_ENV || '"APP_ENV" NOT DEFINED';
-const appSecret = process.env.APP_SECRET || '"APP_SECRET" NOT DEFINED';
-
+// Three endpoints are exposed: /, /env and /secret.
+// The environment variable APP_ENV is returned on /env and and APP_SECRET on /secret
 app.get('/', (req, res) => res.send('Hello World!. Go to /env or /secret'))
-app.get('/env', (req, res) => res.send(appEnv))
-app.get('/secret', (req, res) => res.send(appSecret))
+app.get('/env', (req, res) => res.send("APP_ENV=" + process.env.APP_ENV))
+app.get('/secret', (req, res) => res.send("APP_SECRET=" + process.env.APP_SECRET))
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+const port = 8080
+app.listen(port, () => console.log(`App running on port ${port}!`))

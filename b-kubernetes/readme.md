@@ -41,20 +41,20 @@ kubectl get service
 # Now you should clean up. You only need to delete the service and the "deployment", and not the pod 
 # If you try to delete the pod first it will be redeployed, because the "deployment" expects a running pod.
 
-kubectl delete deploy/<deployment-name>
-kubectl delete service/<service-name>
+kubectl delete deploy/my-api-app
+kubectl delete service/my-api-service
 ```
  
 #### 3. Deploy configuration - "kubectl apply"
-The file "node-api-deployment.yaml" contains the configuration required to create a "deployment" and "pod" similar to the previous section. The configuration is based on [A deployment configuration](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment).
+The file "deployment.yaml" contains the configuration required to create a "deployment" and "pod" similar to the previous section. The configuration is based on [A deployment configuration](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment).
 
 Furthermore, we have added some environment variables in the configuration. The environment variable APP_DEV is set to "DEV" and APP_SECRET="NOT_REALLY_A_SECRET_YET"".
 
 Now you can deploy:
 ```bash
 # Deploy the app
-kubectl apply -f node-api-deployment.yaml
-kubectl apply -f node-api-service.yaml
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
 
 # Show status on pods, deployments and service
 kubectl get pod
@@ -72,7 +72,7 @@ We will add a secret as well called "my-app-secret"
 kubectl create secret generic my-app-secret --from-literal=appsecret='This is a very secret message'
 ```
 
-If we want to use this secret, we need to make an adjustment in node-api-deployment.yaml.
+If we want to use this secret, we need to make an adjustment in deployment.yaml.
 
 ```yaml
 # The environment variable:
@@ -87,3 +87,15 @@ If we want to use this secret, we need to make an adjustment in node-api-deploym
       name: my-app-secret
       key: appsecret
 ``` 
+
+
+```bash
+# Deploy the deployment again
+kubectl apply -f deployment.yaml
+
+# Go to the browser at localhost:8080/secret and it should show the secret
+
+# Remember to clean up
+kubectl delete deploy/my-api
+kubectl delete service/my-api-service
+```   

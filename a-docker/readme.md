@@ -21,7 +21,7 @@ npm install
 node index.js
 ```
 
-> Why nodejs? Because it is very simple. One file "index.js" with 13 lines of code
+> Why nodejs? Because it is very simple. One file "index.js" with a few lines of code
 
 #### Build and run with docker
 ```bash
@@ -32,6 +32,10 @@ docker build . --tag my-api:1.0.0
 docker run -d -p 8080:8080 my-api:1.0.0
 
 # Open your browser at http://localhost:8080
+
+# See containers and stop it
+docker ps
+docker stop <container-id>
 
 # Run with environment variables
 docker run -d -p 8080:8080 --env APP_ENV="hi" --env APP_SECRET="very secret message" my-api:1.0.0
