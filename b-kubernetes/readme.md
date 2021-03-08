@@ -3,7 +3,6 @@ We will deploy to a local kubernetes cluster with kubectl.
 
 #### Agenda: 
 1. Create a cluster on your machine.
-2. 'kubectl run'. Deploy docker image to kubernetes. Similar to 'docker run'
 3. 'kubectl apply'. Deploy docker image to kubernetes based on configuration
 4. Add a secret to kubernetes
 
@@ -15,38 +14,24 @@ You will need to run a kubernetes cluster locally. This is fairly straight forwa
  3. Find "Kubernetes" tab and click "Enable Kubernetes"
  4. Wait a bit
 
-#### 2. Run image - "kubectl run"
+#### 2. Run image - "kubectl run" (Optional)
 You can run an image with "kubectl run" which is very similar to "docker run" in the previous section.
+The statement below creates a **pod** with one container.
 
 ```bash
 kubectl run --image=my-api:1.0.0 my-api-app --port=8080
-
-# The statement above will create two resources: a "deployment" and a "pod". 
-# A "pod" is usually a docker container and a "deployment" is a description of the desired state after a deploy.
-# For instance, a "deployment" will describe which image to use, which ports to expose and how many instances of an app
-
-# You can see pods and deployments with:
-kubectl get deploy
-kubectl get pod
-
-# The pod runs inside the clusters network. You can expose it through a service. 
-# We will call it "my-api-service" that exposes the app on localhost:8080.
-kubectl expose deployment my-api-app --type=LoadBalancer --name=my-api-service --port=8080
-
-# You can see it here
-kubectl get service
-
-# Again you can open your browser on http://localhost:8080
-
-# Now you should clean up. You only need to delete the service and the "deployment", and not the pod 
-# If you try to delete the pod first it will be redeployed, because the "deployment" expects a running pod.
-
-kubectl delete deploy/my-api-app
-kubectl delete service/my-api-service
 ```
- 
+BUT... We want to do more than that. See the next section.
+  
 #### 3. Deploy configuration - "kubectl apply"
-The file "deployment.yaml" contains the configuration required to create a "deployment" and "pod" similar to the previous section. The configuration is based on [A deployment configuration](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment).
+We want to create two kubernetes resources: a **deployment** and a **service**.
+
+A **deployment** is a kubernetes concept - it describes a "desired state".
+The "desired state" could be: I want three pods running with an open port on 8080 and with environments variables: APP_ENV="hi" and APP_SECRET="very secret message".
+
+If for instance a pod crashes (maybe as a result of a memory leak), the deployment will automatically create a pod to recreate the desired state.  
+
+The file "deployment.yaml" contains the configuration required to create a deployment and the corresponding pod(s). The configuration is based on [A deployment configuration](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment).
 
 Furthermore, we have added some environment variables in the configuration. The environment variable APP_DEV is set to "DEV" and APP_SECRET="NOT_REALLY_A_SECRET_YET"".
 
@@ -60,7 +45,6 @@ kubectl apply -f service.yaml
 kubectl get pod
 kubectl get deploy
 kubectl get service
-
 ```   
 
 #### Secrets

@@ -27,9 +27,7 @@ choco install kubernetes-helm -y
 ``` 
 
 ###### 2. Install Manually
-- Docker. [Install docker](https://docs.docker.com/docker-for-windows/install/)
-- Kubernetes CLI. [Install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-    - This might be included in the Docker installation. Test if exists with "kubectl version"  
+- Docker. [Install docker](https://docs.docker.com/docker-for-windows/install/)  
 - Helm CLI ("helm"). [Install helm](https://github.com/helm/helm/releases)
     
 ![Kubernetes image](kubernetes-overview.png)
