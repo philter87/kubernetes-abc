@@ -3,6 +3,7 @@ We will deploy to a local kubernetes cluster with kubectl.
 
 #### Agenda: 
 1. Create a cluster on your machine.
+2. 'kubectl run. Similar to 'docker run'
 3. 'kubectl apply'. Deploy docker image to kubernetes based on configuration
 4. Add a secret to kubernetes
 
@@ -27,18 +28,20 @@ BUT... We want to do more than that. See the next section.
 We want to create two kubernetes resources: a **deployment** and a **service**.
 
 A **deployment** is a kubernetes concept - it describes a "desired state".
-The "desired state" could be: I want three pods running with an open port on 8080 and with environments variables: APP_ENV="hi" and APP_SECRET="very secret message".
+For example, it could be: I want three pods running with an open port on 8080 and with environments variables: APP_ENV="hi" and APP_SECRET="very secret message".
 
-If for instance a pod crashes (maybe as a result of a memory leak), the deployment will automatically create a pod to recreate the desired state.  
+If a pod crashes (maybe as a result of a memory leak), the deployment will automatically create a pod to obtain the desired state.  
 
-The file "deployment.yaml" contains the configuration required to create a deployment and the corresponding pod(s). The configuration is based on [A deployment configuration](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment).
+The file "deployment.yaml" contains the configuration required to create a deployment. The configuration is based on [This deployment configuration](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment).
 
-Furthermore, we have added some environment variables in the configuration. The environment variable APP_DEV is set to "DEV" and APP_SECRET="NOT_REALLY_A_SECRET_YET"".
+A **service** is a sort of proxy that points to a group of pods fulfilling a condition defined in service's selector field. For instance, the selector might search for pods with the label "app: my-api-label". Pods come and go, so it is convenient for other services to point to a service instead of directly to a pod.
 
 Now you can deploy:
 ```bash
 # Deploy the app
 kubectl apply -f deployment.yaml
+
+# We will also expose the pods with a service on port 8080
 kubectl apply -f service.yaml
 
 # Show status on pods, deployments and service
